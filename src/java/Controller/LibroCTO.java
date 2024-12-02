@@ -1,110 +1,104 @@
 package Controller;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 import Model.Libro;
 import Persist.LibroJpaController;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 
-/**
- *
- * @author oscar
- */
+
 @WebServlet(urlPatterns = {"/libros/*"})
 public class LibroCTO extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LibroCTO</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LibroCTO at " + request.getRequestURI()+ "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String uri = request.getRequestURI();
-        if(uri.equals("/libreria/libros/inicio")){
-            LibroJpaController libroDAO = new LibroJpaController();
-            List<Libro> libros = libroDAO.findLibroEntities();
-            request.setAttribute("datos", libros);
-            request.setAttribute("pagina", "/paginas/bienvenida.jsp");
-            request.setAttribute("titulo_pag", "Pagina principal");
-            request.getRequestDispatcher("/index.jsp")
-                    .forward(request, response);
-        }
-        if(uri.equals("/libreria/libros/crear")){
-            request.setAttribute("pagina", "/paginas/crear.jsp");
-            request.setAttribute("titulo_pag", "Nuevo libro");
-            request.getRequestDispatcher("/index.jsp")
-                    .forward(request, response);
+        try {
+            if (uri.equals("/libreria/libros/inicio")) {
+                LibroJpaController libroDAO = new LibroJpaController();
+                List<Libro> libros = libroDAO.findLibroEntities();
+                request.setAttribute("datos", libros);
+                request.setAttribute("pagina", "/paginas/bienvenida.jsp");
+                request.setAttribute("titulo_pag", "Pagina principal");
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+            }
+            if (uri.equals("/libreria/libros/crear")) {
+                request.setAttribute("pagina", "/paginas/crear.jsp");
+                request.setAttribute("titulo_pag", "Nuevo libro");
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+            }
+        } catch (EntityNotFoundException ex) {
+            // Manejar la excepción: libro no encontrado
+            request.setAttribute("error", "No se encontraron libros.");
+            request.getRequestDispatcher("/error.jsp").forward(request, response); 
+        } catch (IOException | ServletException ex) {
+            // Manejar otras excepciones
+            request.setAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo más tarde.");
+            request.getRequestDispatcher("/error.jsp").forward(request, response); 
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        response.sendRedirect("/libreria/libros/inicio");
+        String uri = request.getRequestURI();
+        try {
+            if (uri.contains("/libreria/libros/crear")) {
+            
+                // Obtener los datos del formulario
+                String isbn = request.getParameter("isbn");
+                String titulo = request.getParameter("titulo");
+                String autor = request.getParameter("autor");
+                String editorial = request.getParameter("editorial");
+                Integer anio = Integer.valueOf(request.getParameter("anio"));
+                String slug = Libro.toSlug(titulo); 
+                // Validar los datos del formulario (implementar validaciones)
+
+                LibroJpaController gestorLibros = new LibroJpaController();
+
+                // Intentar crear el nuevo libro
+                Libro nuevoLibro = new Libro(isbn, titulo, autor, editorial, anio, slug);
+                gestorLibros.create(nuevoLibro);
+
+                // Redireccionar a la página de éxito
+                response.sendRedirect("/libreria/libros/inicio");
+            }if(uri.contains("/libreria/libros/ver")){
+//                 Recoger el isbn para recuperar el libro
+                LibroJpaController gestorLibros = new LibroJpaController();
+                    Libro objLibro = gestorLibros.findLibro(Integer.valueOf(request.getParameter("id")));
+//                request.removeAttribute("isbn"); //ya no lo necesito porque esta en la instancia
+                request.setAttribute("libro", objLibro);
+                request.setAttribute("pagina", "/paginas/mostrar.jsp");
+                request.setAttribute("titulo_pag", objLibro.getTitulo());
+                request.getRequestDispatcher("/index.jsp")
+                        .forward(request, response);
+            }
+        } catch (EntityExistsException ex) {
+            // Manejar el error: el libro ya existe
+            request.setAttribute("error", "El libro con ISBN " + request.getParameter("isbn") + " ya existe.");
+            request.getRequestDispatcher("/paginas/error.jsp").forward(request, response);
+
+        } catch (NumberFormatException ex) {
+            // Manejar error de formato de número
+            request.setAttribute("error", "Error en el formato de los datos numéricos.");
+            request.getRequestDispatcher("/paginas/error.jsp").forward(request, response); 
+
+        } catch (IOException ex) {
+            // Manejar otras excepciones
+            request.setAttribute("error", "Error al crear el libro. Por favor, inténtelo de nuevo más tarde.");
+            request.getRequestDispatcher("/paginas/error.jsp").forward(request, response); 
+        }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Servlet para gestionar libros";
+    }
 }

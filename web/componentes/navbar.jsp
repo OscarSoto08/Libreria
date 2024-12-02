@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"></a>
@@ -19,7 +18,7 @@
             <a class="nav-link" href="/libreria/libros/crear">Nuevo libro</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<!--          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
           </a>
           <ul class="dropdown-menu">
@@ -31,11 +30,11 @@
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
+        </li>-->
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Escribe tu busqueda" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
     </div>
   </div>

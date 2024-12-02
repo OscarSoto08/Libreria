@@ -21,9 +21,12 @@
   %>
             <div class="col-md-3">
                 <jsp:include page="/componentes/card.jsp">
-                    <jsp:param name="titulo_libro" value="<%= libro.getTitulo() %>"/>
-                    <jsp:param name="editorial" value="<%= libro.getEditorial() %>"/>
-                    <jsp:param name="anio_libro" value="<%= libro.getAnio() %>"/>
+                    <jsp:param name="libro_titulo" value="<%= libro.getTitulo() %>" />
+                    <jsp:param name="libro_autor" value="<%= libro.getAutor() %>" />
+                    <jsp:param name="libro_editorial" value="<%= libro.getEditorial() %>" />
+                    <jsp:param name="libro_slug" value="<%= libro.getSlug()%>" />
+                    <jsp:param name="libro_anio" value="<%= libro.getAnio()%>" />
+                    <jsp:param name="libro_id" value="<%= libro.getId()%>"/>
                 </jsp:include>
             </div>
   <%

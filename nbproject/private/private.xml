@@ -3,17 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/oscar/Documents/NetBeansProjects/Libreria/src/java/Persist/TbLibroJpaController.java</file>
-            <file>file:/C:/Users/oscar/Documents/NetBeansProjects/Libreria/web/index.jsp</file>
-            <file>file:/C:/Users/oscar/Documents/NetBeansProjects/Libreria/web/paginas/crear.jsp</file>
-            <file>file:/C:/Users/oscar/Documents/NetBeansProjects/Libreria/web/paginas/bienvenida.jsp</file>
-            <file>file:/C:/Users/oscar/Documents/NetBeansProjects/Libreria/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/oscar/Documents/NetBeansProjects/Libreria/src/conf/persistence.xml</file>
-            <file>file:/C:/Users/oscar/Documents/NetBeansProjects/Libreria/web/componentes/card.jsp</file>
-            <file>file:/C:/Users/oscar/Documents/NetBeansProjects/Libreria/src/java/Model/TbLibro.java</file>
-            <file>file:/C:/Users/oscar/Documents/NetBeansProjects/Libreria/src/java/Controller/LibroCTO.java</file>
-            <file>file:/C:/Users/oscar/Documents/NetBeansProjects/Libreria/web/componentes/navbar.jsp</file>
-            <file>file:/C:/Users/oscar/Documents/NetBeansProjects/Libreria/web/css/style.css</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/web/paginas/error.jsp</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/web/paginas/bienvenida.jsp</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/src/conf/persistence.xml</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/src/java/Controller/LibroCTO.java</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/web/componentes/navbar.jsp</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/src/java/Model/Libro.java</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/web/paginas/crear.jsp</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/web/componentes/card.jsp</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/web/index.jsp</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/src/java/Persist/LibroJpaController.java</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/web/paginas/mostrar.jsp</file>
         </group>
     </open-files>
 </project-private>
