@@ -5,7 +5,7 @@ Libro libro = (Libro) request.getAttribute("libro");
 
 <div class="form-container">
     <h2>Información del Libro</h2>
-    <form method="get" action="/libreria/libros/inicio">
+    <form method="post" action="/libreria/libros/editar">
         <div class="form-group">
             <label for="isbn">ISBN:</label>
             <input type="text" id="isbn" name="isbn" value="<%= libro.getIsbn()%>" required>

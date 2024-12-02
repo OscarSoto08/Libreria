@@ -27,7 +27,8 @@ public class LibroCTO extends HttpServlet {
                 request.setAttribute("datos", libros);
                 request.setAttribute("pagina", "/paginas/bienvenida.jsp");
                 request.setAttribute("titulo_pag", "Pagina principal");
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                request.getRequestDispatcher("/index.jsp").
+                        forward(request, response);
             }
             if (uri.equals("/libreria/libros/crear")) {
                 request.setAttribute("pagina", "/paginas/crear.jsp");
@@ -44,9 +45,7 @@ public class LibroCTO extends HttpServlet {
             request.getRequestDispatcher("/error.jsp").forward(request, response); 
         }
     }
-
-    
- 
+     
     
     //
     @Override
@@ -83,7 +82,13 @@ public class LibroCTO extends HttpServlet {
                 request.setAttribute("titulo_pag", objLibro.getTitulo());
                 request.getRequestDispatcher("/index.jsp")
                         .forward(request, response);
+            }if(uri.contains("/libreria/libros/editar")){
+                response.sendRedirect("/libreria/libros/inicio");
+                //TODO: recuperar los parametros que te llegan y modificarlos en la bd
+            }if(uri.contains("/libreria/libros/eliminar")){
+                //TODO: recuperar el id y eliminar el registro de la bd
             }
+            
         } catch (EntityExistsException ex) {
             // Manejar el error: el libro ya existe
             request.setAttribute("error", "El libro con ISBN " + request.getParameter("isbn") + " ya existe.");
