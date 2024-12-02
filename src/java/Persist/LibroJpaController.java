@@ -13,7 +13,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
@@ -118,6 +122,33 @@ public class LibroJpaController implements Serializable {
         }
     }
 
+    public List<Libro> filterLibro(Libro libro) {
+        EntityManager em = getEntityManager();
+        List<Libro> libros = null; 
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Libro> cq = cb.createQuery(Libro.class);
+            Root<Libro> libroRoot = cq.from(Libro.class);
+
+            Predicate tituloFiltro = cb.like(libroRoot.get("titulo"), "%" + libro.getTitulo() + "%");
+            Predicate autorFilto = cb.like(libroRoot.get("autor"), "%" + libro.getAutor() + "%");
+            Predicate editorialFiltro = cb.like(libroRoot.get("editorial"), "%" + libro.getEditorial() + "%");
+            Predicate anioFiltro = cb.like(libroRoot.get("anio"), "%" + libro.getAnio() + "%");
+            
+            Predicate condicionF = cb.or(tituloFiltro, autorFilto, editorialFiltro, anioFiltro);
+            cq.select(libroRoot).where(condicionF);
+
+            TypedQuery<Libro> query = em.createQuery(cq);
+            libros = query.getResultList();
+        } catch (PersistenceException e) {
+            // Manejar la excepción, por ejemplo, registrarla o lanzar una excepción personalizada
+            e.printStackTrace(); 
+        } finally {
+            em.close();
+        }
+        return libros;
+    }
+    
     public Libro findLibro(Integer id) {
         EntityManager em = getEntityManager();
         try {

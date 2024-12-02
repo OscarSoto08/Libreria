@@ -32,10 +32,9 @@
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>-->
       </ul>
-      <form class="d-flex" role="search">
+      <div class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Escribe tu busqueda" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
+      </div>
     </div>
   </div>
 </nav>
