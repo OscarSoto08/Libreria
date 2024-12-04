@@ -1,11 +1,12 @@
 <%@ page import="java.util.List" %>
-<%@ page import="Model.Libro" %>
+<%@ page import="Model.LibroDTO" %>
 <%@ page import="Controller.LibroCTO" %>
-<div class="form-container">
-        <h2>Nuevo Libro</h2>
+
+<div class="my-5 form-container">
+        <h1 class="text-center font-semibold text-3xl my-3">NUEVO LIBRO</h1 >
         <form method="post" action="/libreria/libros/crear">
             <div class="form-group">
-                <label for="isbn">ISBN:</label>
+                <label for="isbn" class="">ISBN:</label>
                 <input type="text" id="isbn" name="isbn" required>
             </div>
             <div class="form-group">
@@ -25,7 +26,7 @@
                 <input type="text" id="editorial" name="editorial" required>
             </div>
             <div class="btn-container">
-                <button type="submit" class="btn">Guardar</button>
+                <button type="submit" class="btn btn-success">CREAR</button>
             </div>
         </form>
     </div>

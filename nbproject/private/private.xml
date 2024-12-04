@@ -4,16 +4,20 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/oscar/Documents/Libreria/web/paginas/error.jsp</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/src/java/Persistencia/ConexionMySQL.java</file>
             <file>file:/C:/Users/oscar/Documents/Libreria/web/paginas/bienvenida.jsp</file>
-            <file>file:/C:/Users/oscar/Documents/Libreria/src/conf/persistence.xml</file>
-            <file>file:/C:/Users/oscar/Documents/Libreria/src/java/Controller/LibroCTO.java</file>
-            <file>file:/C:/Users/oscar/Documents/Libreria/web/componentes/navbar.jsp</file>
-            <file>file:/C:/Users/oscar/Documents/Libreria/src/java/Model/Libro.java</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/src/java/Persistencia/Contrato.java</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/web/css/style.css</file>
             <file>file:/C:/Users/oscar/Documents/Libreria/web/paginas/crear.jsp</file>
             <file>file:/C:/Users/oscar/Documents/Libreria/web/componentes/card.jsp</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/src/java/Controller/LibroCTO.java</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/web/componentes/navbar.jsp</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/database/biblioteca.sql</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/src/java/Persistencia/LibroDAO.java</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/src/java/Model/LibroDTO.java</file>
             <file>file:/C:/Users/oscar/Documents/Libreria/web/index.jsp</file>
-            <file>file:/C:/Users/oscar/Documents/Libreria/src/java/Persist/LibroJpaController.java</file>
             <file>file:/C:/Users/oscar/Documents/Libreria/web/paginas/mostrar.jsp</file>
+            <file>file:/C:/Users/oscar/Documents/Libreria/web/componentes/alert.jsp</file>
         </group>
     </open-files>
 </project-private>
